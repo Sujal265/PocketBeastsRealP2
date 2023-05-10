@@ -25,12 +25,18 @@ import java.util.List;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class Hand {
+public class Hand implements Component{
+    
+    private String name;
+     private final List<Component> components;
+    
+
     
     private final ArrayList<Card> cards;
 
     public Hand() {
         this.cards = new ArrayList<>();
+        this.components = new ArrayList<>();
     }
 
     public void add(Card card) {
@@ -43,8 +49,15 @@ public class Hand {
         this.sort();
     }
 
+        public Hand(String name) {
+        this.name = name;
+          this.cards = new ArrayList<>();
+        this.components = new ArrayList<>();
+    }
+       
     public void remove(Card card) {
         this.cards.remove(card);
+        
     }
 
     public void removeAll(List<Card> cards) {
@@ -79,6 +92,25 @@ public class Hand {
     private void sort() {
         Collections.sort(this.cards);
     }
+    
+  @Override
+    public void add(Component component) {
+        this.components.add(component);
+    }
+
+    @Override
+    public void remove(Component component) {
+        this.components.remove(component);
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Hand: " + this.name);
+        for (Component component : this.components) {
+            component.display();
+        }
+    }
+  
 
    
 }

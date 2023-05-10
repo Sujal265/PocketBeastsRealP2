@@ -24,15 +24,17 @@ import java.util.List;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class Graveyard {
-    
+public class Graveyard implements Component{
+    private String name;
     private final ArrayList<Card> cards;
+    private final List<Component> components;
 
     /**
      * Constructs a new, empty graveyard.
      */
     public Graveyard() {
         this.cards = new ArrayList<>();
+        this.components = new ArrayList<>();
     }
     
     /**
@@ -60,5 +62,29 @@ public class Graveyard {
      */
     public List<Card> getCards() {
         return new ArrayList<>(this.cards);
+    }
+    
+       public Graveyard(String name) {
+        this.name = name;
+        this.components = new ArrayList<>();
+        this.cards = new ArrayList<>();
+    }
+
+    @Override
+    public void add(Component component) {
+        this.components.add(component);
+    }
+
+    @Override
+    public void remove(Component component) {
+        this.components.remove(component);
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Graveyard: " + this.name);
+        for (Component component : this.components) {
+            component.display();
+        }
     }
 }

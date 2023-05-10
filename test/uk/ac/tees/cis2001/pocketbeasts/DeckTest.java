@@ -18,19 +18,19 @@ import static org.junit.Assert.*;
  * @author sujalnagpal
  */
 public class DeckTest {
-
-private Deck deck;
+    
+ private Deck deck;
     private Card card1;
     private Card card2;
     private Card card3;
 
     @Before
     public void setUp() {
-         // Create a new deck with some cards
+        // Create a new deck with some cards
         ArrayList<Card> cards = new ArrayList<>();
-        card1 = new Card(Card.Rank.JACK, Card.Suit.DIAMONDS,"001", "PocketBeast", 2, 3, 4);
-        card2 = new Card(Card.Rank.SIX, Card.Suit.HEARTS,"002", "FireDragon", 5, 6, 7);
-        card3 = new Card(Card.Rank.QUEEN, Card.Suit.SPADES,"003", "IceGolem", 8, 9, 10);
+        card1 = new Card(Card.Rank.JACK, Card.Suit.DIAMONDS, "001", "PocketBeast", 2, 3, 4);
+        card2 = new Card(Card.Rank.SIX, Card.Suit.HEARTS, "002", "FireDragon", 5, 6, 7);
+        card3 = new Card(Card.Rank.QUEEN, Card.Suit.SPADES, "003", "IceGolem", 8, 9, 10);
         cards.add(card1);
         cards.add(card2);
         cards.add(card3);
@@ -46,9 +46,10 @@ private Deck deck;
 
     @Test
     public void testDraw() {
-        Card expResult = card1;
-        Card result = deck.draw();
-        assertEquals(expResult, result);
+
+    Card expResult = card1;
+    Card result = deck.draw();
+    assertEquals(expResult, result);
     }
 
     @Test
@@ -59,7 +60,7 @@ private Deck deck;
 
     @Test
     public void testAddCard() {
-        Card newCard = new Card(Card.Rank.FIVE, Card.Suit.CLUBS,"004", "WaterElemental", 3, 4, 5);
+        Card newCard = new Card(Card.Rank.FIVE, Card.Suit.CLUBS, "004", "WaterElemental", 3, 4, 5);
         deck.addCard(newCard);
         assertTrue(deck.contains(newCard));
     }
@@ -80,13 +81,9 @@ private Deck deck;
 
     @Test
     public void testToString() {
-      ArrayList<Card> cards = new ArrayList<>();
-Card fireDragon = new Card(Card.Rank.SIX, Card.Suit.HEARTS,"002", "FireDragon", 6, 7, 5);
-Card iceGolem = new Card(Card.Rank.QUEEN, Card.Suit.SPADES,"003", "IceGolem", 4, 5, 3);
-Card waterElemental = new Card(Card.Rank.FIVE, Card.Suit.CLUBS,"004", "WaterElemental", 5, 6, 4);
-cards.add(fireDragon);
-cards.add(iceGolem);
-cards.add(waterElemental);
-Deck deck = new Deck(cards);
-    } 
+          // Create a new deck with some cards
+    String expResult = "FireDragon of HEARTS (6/7/5)\nIceGolem of SPADES (4/5/3)\nWaterElemental of CLUBS (5/6/4)\n";
+    String result = deck.toString();
+    assertEquals(expResult, result);
+    }
 }

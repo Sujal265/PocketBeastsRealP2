@@ -25,9 +25,10 @@ import java.util.UUID;
  */
 public class Card implements Comparable<Card> {
 
-    Card(Suit suit, Rank rank) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
+
+
+    
 
  public enum Rank {
     ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
@@ -80,6 +81,16 @@ public class Card implements Comparable<Card> {
     
     public Suit getSuit() {
         return this.suit;
+    }
+    
+    public Card(String name) {
+        this.name = name;
+         this.rank = null;
+    this.suit = null;
+    this.id = UUID.randomUUID().toString();
+    this.manaCost = 0;
+    this.attack = 0;
+    this.health = 0;
     }
     /**
      * Returns the ID of the card.
@@ -141,6 +152,17 @@ public class Card implements Comparable<Card> {
         
      
     }
+    @Override
+public boolean equals(Object obj) {
+    if (obj == this) { // check if the object is the same as this one
+        return true;
+    }
+    if (!(obj instanceof Card)) { // check if the object is a Card
+        return false;
+    }
+    Card card = (Card) obj; // cast the object to a Card
+    return this.name.equals(card.name); // compare the names
+}
    
    
    }

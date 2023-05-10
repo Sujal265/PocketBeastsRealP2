@@ -42,12 +42,12 @@ public class MainTest {
      */
     @Test
     public void testGetStarterDeck() {
-         System.out.println("getStarterDeck");
-    ArrayList<Card> expResult = new ArrayList<>();
-    expResult.add(new Card(Card.Rank.ACE, Card.Suit.CLUBS, "BR", "Barn Rat", 1, 1, 1));
-    expResult.add(new Card(Card.Rank.ACE, Card.Suit.CLUBS, "BR", "Barn Rat", 1, 1, 1));
-    ArrayList<Card> result = Main.getStarterDeck();
-    assertEquals(expResult, result);
+        System.out.println("getStarterDeck");
+        ArrayList<Card> expResult = null;
+        ArrayList<Card> result = Main.getStarterDeck();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**

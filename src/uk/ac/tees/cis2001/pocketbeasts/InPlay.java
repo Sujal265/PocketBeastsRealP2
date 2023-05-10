@@ -25,16 +25,21 @@ import java.util.List;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class InPlay {
+public class InPlay implements Component{
+        private final String name;
+
     
     /** The list of cards that are currently in play. */
     private final List<Card> cards;
+      private final List<Component> components;
 
     /**
      * Constructs a new instance of the InPlay class.
      */
     public InPlay() {
+        this.name = "";
         this.cards = new ArrayList<>();
+        this.components = new ArrayList<>();
     }
 
     /**
@@ -63,6 +68,12 @@ public class InPlay {
     public void add(Card card) {
         this.cards.add(card);
     }
+    
+     public InPlay(String name) {
+        this.name = name;
+        this.cards = new ArrayList<>();
+        this.components = new ArrayList<>();
+    }
 
     /**
      * Removes a card from the list of cards that are currently in play.
@@ -86,5 +97,23 @@ public class InPlay {
      */
     public int count() {
         return this.cards.size();
+    }
+    
+    @Override
+    public void add(Component component) {
+        this.components.add(component);
+    }
+
+    @Override
+    public void remove(Component component) {
+        this.components.remove(component);
+    }
+
+    @Override
+    public void display() {
+        System.out.println("InPlay: " + this.name);
+        for (Component component : this.components) {
+            component.display();
+        }
     }
 }

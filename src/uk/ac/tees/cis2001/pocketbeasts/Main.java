@@ -50,17 +50,21 @@ public class Main {
         return starterDeck;
     }
     
+    
+    
     public static String getPrompt(String prompt, String[] validResponse){
-        System.out.print(prompt);
-        
-        Scanner sc = new Scanner(System.in);
-        String response = sc.nextLine();
-        
-        if (Arrays.stream(validResponse).anyMatch(response::equals)) {
-            return response;
-        }
-        
-        return getPrompt(prompt, validResponse);
+         System.out.print(prompt);
+    
+    Scanner sc = new Scanner(System.in);
+    System.out.println(sc.toString()); // new line added
+    String response = sc.nextLine();
+    
+    if (Arrays.stream(validResponse).anyMatch(response::equals)) {
+        return response;
+    }
+    
+    return getPrompt(prompt, validResponse);
+
     }
     
     /**
@@ -68,12 +72,18 @@ public class Main {
      */
     public static void main(String[] args) {
         
+        
+        
+     
+
+        
         System.out.println("");
         System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+");
         System.out.println("Welcome to PocketBeasts!");
         System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+");
         System.out.println("");
         System.out.println("This basic console application tests our underlying software design patterns.");
+        System.out.println("We have used the Strategy pattern to allow players to choose how they want to attack, either directly or by attacking another player's beast.");
         System.out.println("");
         System.out.println("Here's a key for each card:");
         System.out.println("");
@@ -101,16 +111,59 @@ public class Main {
         System.out.println("Press ENTER to continue...");
         Scanner sc = new Scanner(System.in);
         sc.nextLine();
-
-        Player[] players = new Player[] {
-            new Player("James", new Deck(getStarterDeck())),
-            new Player("Steve", new Deck(getStarterDeck()))
-        }; 
         
-        for (Player player : players) {
-            player.newGame();
-            System.out.println(player);
-        }
+          
+        // Create a basic beast
+        Beast basicBeast = new BasicBeast("Dragon", 10, 8, 100, 0);
+        Beast armoredBeast = new ArmoredBeast(basicBeast, 20) {
+            @Override
+            public int getAttack() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        };
+        System.out.println(armoredBeast.getDefense()); // Output: 25 (5 + 20)
+
+        // Decorate the basic beast with the FlyingBeastDecorator
+        Beast flyingBeast = new FlyingBeastDecorator(basicBeast, 20);
+
+        // Print the details of the basic beast
+        System.out.println("Details of the basic beast:");
+        System.out.println(basicBeast.getName() + ", Attack: " + basicBeast.getAttack()
+                + ", Defense: " + basicBeast.getDefense() + ", Health: " + basicBeast.getHealth());
+
+        // Print the details of the flying beast
+        System.out.println("Details of the flying beast:");
+        System.out.println(flyingBeast.getName() + ", Attack: " + flyingBeast.getAttack()
+                + ", Defense: " + flyingBeast.getDefense() + ", Health: " + flyingBeast.getHealth()
+                + ", Flight Speed: " + ((FlyingBeastDecorator) flyingBeast).getFlightSpeed());
+    
+  
+   
+                
+            Deck starterDeck = new Deck(getStarterDeck());
+             Hand hand = new Hand();
+             InPlay inPlay = new InPlay();
+             Graveyard graveyard = new Graveyard();
+             Player[] players = new Player[] {
+                 new Player("James", starterDeck, hand, inPlay, graveyard),
+                 new Player("Steve", starterDeck, hand, inPlay, graveyard)
+
+        }; 
+             int[] arr = {5, 2, 8, 3, 9, 1};
+             Sorting sorting = new Sorting(new QuickSortStrategy());
+             sorting.sort(arr);
+             System.out.println(Arrays.toString(arr)); // prints [1, 2, 3, 5, 8, 9]
+
+             sorting.setStrategy(new MergeSortStrategy());
+             sorting.sort(arr);
+             System.out.println(Arrays.toString(arr)); // prints [1, 2, 3, 5, 8, 9]
+
+             sorting.setStrategy(new BubbleSortStrategy());
+             sorting.sort(arr);
+             System.out.println(Arrays.toString(arr)); // prints [1, 2, 3, 5, 8, 9]
+      
+          
+           
         
         String winningMessage = "";
         Boolean run = true;
@@ -224,9 +277,6 @@ public class Main {
         System.out.println(winningMessage);
     }
 
-    static Object getExitStatus() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-     
+
+
 }

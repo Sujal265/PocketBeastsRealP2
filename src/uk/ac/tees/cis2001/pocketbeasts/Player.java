@@ -16,6 +16,8 @@
  */
 package uk.ac.tees.cis2001.pocketbeasts;
 
+import static uk.ac.tees.cis2001.pocketbeasts.Main.getStarterDeck;
+
 /**
  *
  * @author James Fairbairn
@@ -33,6 +35,9 @@ public static final int MAX_MANA = 9;
     private final Hand hand;
     private final InPlay inPlay;
     private final Graveyard graveyard;
+
+    
+   
 
     /**
      * Creates a new instance of the Player class with the specified name, deck, hand, inPlay, and graveyard.
@@ -52,10 +57,13 @@ public static final int MAX_MANA = 9;
         this.inPlay = inPlay;
         this.graveyard = graveyard;
     }
+    
 
-    Player(String james, Deck deck) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+ 
+   
+  
+
+    
 
     /**
      * Gets the name of the player.
@@ -69,6 +77,10 @@ public static final int MAX_MANA = 9;
      * Gets the amount of mana available to the player.
      * @return The amount of mana available to the player.
      */
+  
+  
+  
+    
     public int getManaAvailable() {
         return this.manaAvailable;
     }
@@ -80,6 +92,8 @@ public static final int MAX_MANA = 9;
     public int getHealth() {
         return this.health;
     }
+    
+    
 
     /**
      * Gets the deck of cards for the player.
@@ -105,6 +119,15 @@ public static final int MAX_MANA = 9;
         return this.inPlay;
     }
     
+    
+    
+      public void display() {
+        System.out.println("Player");
+        hand.display();
+        deck.display();
+        graveyard.display();
+    }
+    
 
     /**
      * Gets the graveyard of cards for the player.
@@ -112,6 +135,30 @@ public static final int MAX_MANA = 9;
      */
     public Graveyard getGraveyard() {
         return this.graveyard;
+    }
+    
+    public void addCardToHand(Hand hand) {
+        this.hand.add(hand);
+    }
+
+    public void removeCardFromHand(Hand hand) {
+        this.hand.remove(hand);
+    }
+
+    public void addCardToDeck(Deck deck) {
+        this.deck.add(deck);
+    }
+
+    public void removeCardFromDeck(Deck deck) {
+        this.deck.remove(deck);
+    }
+
+    public void addCardToGraveyard(Graveyard graveyard) {
+        this.graveyard.add(graveyard);
+    }
+
+    public void removeCardFromGraveyard(Graveyard graveyard) {
+        this.graveyard.remove(graveyard);
     }
 
     /**
@@ -189,4 +236,7 @@ public static final int MAX_MANA = 9;
         
         return sb.toString();
     }
+       
+ 
+   
 }

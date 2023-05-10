@@ -18,27 +18,27 @@ package uk.ac.tees.cis2001.pocketbeasts;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class Deck {
-    
-    Deck deck = new Deck();
-    private final ArrayList<Card> cards;
-    
+public class Deck implements Component {
+
+     private String name;
+     private final List<Component> components;
+     private final ArrayList<Card> cards;
 
 
     public Deck(ArrayList<Card> cards) {
         this.cards = new ArrayList<>(cards);
+        this.components = new ArrayList<>();
     }
-
-    Deck() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    
+   
     public int count() {
         return this.cards.size();
     }
@@ -56,30 +56,47 @@ public class Deck {
     }
 
     public void removeCard(Card card) {
-        this.cards.remove(card);
+        this.cards.removeIf(c -> Objects.equals(c, card));
     }
 
     public void clear() {
         this.cards.clear();
     }
+    public Deck(String name) {
+        this.name = name;
+        this.cards = new ArrayList<>();
+         this.components = new ArrayList<>();
+    }
+    
+       public boolean contains(Card card) {
+        return this.cards.contains(card);
+    }
+
+    @Override
+    public void display() {
+        System.out.println(name);
+    }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Deck: [\n");
-        for (int i = 0; i < this.cards.size(); i++) {
-            sb.append("  ");
-            sb.append(this.cards.get(i).toString());
-            if (i < this.cards.size() - 1) {
-                sb.append(" | ");
-            }
-            sb.append("\n");
+       StringBuilder sb = new StringBuilder();
+        for (Card card : cards) {
+            sb.append(card.toString()).append("\n");
         }
-        sb.append("]");
         return sb.toString();
+    
+    }
+    
+     @Override
+    public void add(Component component) {
+        this.components.add(component);
     }
 
-    public boolean contains(Card card) {
-        return this.cards.contains(card);
+    @Override
+    public void remove(Component component) {
+        this.components.remove(component);
     }
+
+ 
+ 
 }
